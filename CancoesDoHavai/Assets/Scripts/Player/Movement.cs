@@ -14,18 +14,19 @@ public class Movement : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float speed = 5f;
     [SerializeField] float acceleration = 50f;
-    [SerializeField] float jumpForce = 5000f;
+    [SerializeField] float[] jumpForce = {7, 13, 10, 7};
     [SerializeField] float jumpAngle = 80;
-    [SerializeField] int maxJumps = 3;
+    [SerializeField] float jumpDelay = 0.2f;
+    [SerializeField] int maxJumps = 4;
     [SerializeField] bool isGrounded = false;
+    float delayTimer;
     int jumpsLeft;
+    
     Vector2 moveDir;
 
     [SerializeField] Rigidbody2D rb;
 
-    private void Awake()
-    {
-    }
+
     void Start()
     {
         inputActions = PlayerInputHolder.instance.playerInput;
@@ -40,7 +41,9 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {   
-        isGrounded = Physics2D.Raycast(transform.position, -Vector2.up,1.2f,groundLayer);
+        delayTimer += Time.deltaTime;
+        if(delayTimer > jumpDelay)
+            isGrounded = Physics2D.Raycast(transform.position, -Vector2.up,1.2f,groundLayer);
         if(isGrounded && jumpsLeft!=maxJumps)
         {
             jumpsLeft = maxJumps;
@@ -68,10 +71,24 @@ public class Movement : MonoBehaviour
     {
         if(jumpsLeft > 0)
         {
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, 0);
             if(moveDir.x * rb.linearVelocityX < 0)
-                rb.linearVelocity = new Vector2(Mathf.Clamp(-rb.linearVelocityX, -speed, speed),rb.linearVelocityY);
-            rb.AddForce(Quaternion.Euler(0, 0, -moveDir.x * jumpAngle) * Vector2.up * jumpForce * jumpsLeft, ForceMode2D.Impulse);
+                rb.linearVelocity = new Vector2(Mathf.Clamp(-rb.linearVelocityX, -speed, speed), rb.linearVelocityY);
+            if(moveDir.x != 0 && Mathf.Abs(rb.linearVelocityX) < 0.1f)
+                rb.linearVelocity = new Vector2(speed * moveDir.x, rb.linearVelocityY);
+
+            float jumpMultipliyer = 1;
+            if(rb.linearVelocityY < -1)
+                jumpMultipliyer = 0.7f;
+            
+            int jumpIndex = 4-jumpsLeft;
+            if(!isGrounded && jumpIndex == 0)
+                jumpIndex = 1;
+
+            rb.AddForce(Quaternion.Euler(0, 0, -moveDir.x * jumpAngle) * Vector2.up * jumpForce[jumpIndex] * jumpMultipliyer, ForceMode2D.Impulse);
             jumpsLeft--;
+            delayTimer = 0;
+            isGrounded = false;
         }
     }
 }
