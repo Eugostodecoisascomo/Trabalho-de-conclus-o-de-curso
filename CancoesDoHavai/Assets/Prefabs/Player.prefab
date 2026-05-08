@@ -175,8 +175,13 @@ MonoBehaviour:
     m_Bits: 8
   speed: 5
   acceleration: 50
-  jumpForce: 4
+  jumpForce:
+  - 7
+  - 13
+  - 10
+  - 7
   jumpAngle: 10
-  maxJumps: 3
+  jumpDelay: 0.2
+  maxJumps: 4
   isGrounded: 0
   rb: {fileID: 1867261523700219258}
