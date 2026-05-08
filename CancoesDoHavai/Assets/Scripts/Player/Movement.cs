@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal.Internal;
@@ -11,11 +13,12 @@ public class Movement : MonoBehaviour
 
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float speed = 5f;
+    [SerializeField] float acceleration = 50f;
     [SerializeField] float jumpForce = 5000f;
-    [SerializeField] float idealJumpCooldown = 0.3f;
+    [SerializeField] float jumpAngle = 80;
     [SerializeField] int maxJumps = 3;
+    [SerializeField] bool isGrounded = false;
     int jumpsLeft;
-    float timeSinceJump;
     Vector2 moveDir;
 
     [SerializeField] Rigidbody2D rb;
@@ -37,44 +40,38 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {   
-        if(Physics2D.Raycast(transform.position, -Vector2.up,1f,groundLayer) && jumpsLeft!=maxJumps)
+        isGrounded = Physics2D.Raycast(transform.position, -Vector2.up,1.2f,groundLayer);
+        if(isGrounded && jumpsLeft!=maxJumps)
         {
             jumpsLeft = maxJumps;
-        }
-        else
-        {
-            timeSinceJump += Time.deltaTime;
         }
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(moveDir.x, rb.linearVelocityY);
+        if(isGrounded)
+        {
+            if(moveDir.x == 0)
+            {
+                rb.linearVelocity = new Vector2(Mathf.MoveTowards(rb.linearVelocityX, 0, acceleration*3*Time.fixedDeltaTime), rb.linearVelocityY);
+            }
+            rb.AddForce(new Vector2(moveDir.x * acceleration,0));
+            rb.linearVelocity = new Vector2(Mathf.Clamp(rb.linearVelocityX, -speed, speed), rb.linearVelocityY);
+        }
     }
 
-
-    /*float GetFinalJumpForce()
-    {
-        
-        float finalJumpForce;
-        float precision = Mathf.Clamp(1 - 2*Mathf.Abs(timeSinceJump - idealJumpCooldown), 0.33f, 1);
-
-        finalJumpForce = jumpForce*precision;
-
-        return finalJumpForce * jumpsLeft;
-    }*/
     private void OnMove(InputAction.CallbackContext value)
     {
-       moveDir = value.ReadValue<Vector2>() * speed;
+        moveDir = value.ReadValue<Vector2>();
     }
     void Jump(InputAction.CallbackContext value)
     {
         if(jumpsLeft > 0)
         {
-            rb.AddForce(Vector2.up * jumpForce * jumpsLeft, ForceMode2D.Impulse);
-            //print(GetFinalJumpForce() + " " + timeSinceJump);
+            if(moveDir.x * rb.linearVelocityX < 0)
+                rb.linearVelocity = new Vector2(Mathf.Clamp(-rb.linearVelocityX, -speed, speed),rb.linearVelocityY);
+            rb.AddForce(Quaternion.Euler(0, 0, -moveDir.x * jumpAngle) * Vector2.up * jumpForce * jumpsLeft, ForceMode2D.Impulse);
             jumpsLeft--;
-            timeSinceJump = 0;
         }
     }
 }

@@ -469,6 +469,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1867261523700219258, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 1c6158fd11f605648a41364a890b7e1b, type: 2}
+    - target: {fileID: 1867261523700219258, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
       propertyPath: m_GravityScale
       value: 3
       objectReference: {fileID: 0}
@@ -476,6 +480,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4987518276454750694, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 1c6158fd11f605648a41364a890b7e1b, type: 2}
     - target: {fileID: 5846726467832397822, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.79166
@@ -515,6 +523,14 @@ PrefabInstance:
     - target: {fileID: 5846726467832397822, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712556571256873040, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
+      propertyPath: jumpAngle
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6712556571256873040, guid: 56134bdd6ff19b2448c95189997d2a14, type: 3}
+      propertyPath: acceleration
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
