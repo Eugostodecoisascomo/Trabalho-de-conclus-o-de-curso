@@ -8,5 +8,6 @@ public class PlayerInputHolder : MonoBehaviour
     void Awake()
     {
         instance = this;
+        playerInput.actionMaps[0].Enable();
     }
 }

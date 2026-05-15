@@ -14,20 +14,25 @@ public class Interactions : MonoBehaviour
         inputActions = PlayerInputHolder.instance.playerInput;
 
         interact = inputActions.FindAction("Interact");
+        interact.Enable();
         interact.performed += Interact;
     }
     bool GetInteractableAround(out GameObject result)
     {
-        result = Physics2D.CircleCast(transform.position, interactionRange, Vector2.zero, 0, interactionLayer).collider.gameObject;
-        return result;
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, interactionRange, Vector2.zero, 0, interactionLayer);
+        if(hit.collider != null)
+        {
+            result = hit.collider.gameObject;
+            return true;
+        }
+        result = null;
+        return false;
     }
     void Interact(InputAction.CallbackContext value)
     {
         print("Checking");
         GameObject result;
         if(GetInteractableAround(out result))
-        {
-            print("Found Interactable");
-        }
+            print("Found interact");
     }
 }
