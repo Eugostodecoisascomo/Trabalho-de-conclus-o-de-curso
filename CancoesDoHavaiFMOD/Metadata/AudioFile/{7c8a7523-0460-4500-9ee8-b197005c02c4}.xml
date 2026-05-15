@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{7c8a7523-0460-4500-9ee8-b197005c02c4}">
+		<property name="assetPath">
+			<value>EDITED/FS/Sand/sand_19.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.81556249999999997</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f0db8f21-9fe1-40a7-9f71-e5f9d573375a}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="ParameterPreset" id="{98e8834a-e270-4eac-80fe-353956a53bd3}">
 		<property name="name">
-			<value>isLight</value>
+			<value>isLightStep</value>
 		</property>
 		<relationship name="folder">
 			<destination>{84637981-b016-4ee2-b6ad-236298705894}</destination>

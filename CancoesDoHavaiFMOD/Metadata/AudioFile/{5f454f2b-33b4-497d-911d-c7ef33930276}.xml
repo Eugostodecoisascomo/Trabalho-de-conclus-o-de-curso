@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="AudioFile" id="{5f454f2b-33b4-497d-911d-c7ef33930276}">
 		<property name="assetPath">
-			<value>EDITED/FS/lightstep_04.wav</value>
+			<value>EDITED/FS/Light/lightstep_04.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>

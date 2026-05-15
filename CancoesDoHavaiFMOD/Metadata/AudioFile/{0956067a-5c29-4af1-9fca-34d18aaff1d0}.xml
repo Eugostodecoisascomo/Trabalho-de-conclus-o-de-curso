@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{0956067a-5c29-4af1-9fca-34d18aaff1d0}">
+		<property name="assetPath">
+			<value>UNEDITED/FS/UNEDITED_wood_03.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>13.906333333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f0db8f21-9fe1-40a7-9f71-e5f9d573375a}</destination>
+		</relationship>
+	</object>
+</objects>

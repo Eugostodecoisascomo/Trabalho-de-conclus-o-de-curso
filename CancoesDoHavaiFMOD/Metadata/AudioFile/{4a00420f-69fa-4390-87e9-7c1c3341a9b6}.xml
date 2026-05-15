@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{4a00420f-69fa-4390-87e9-7c1c3341a9b6}">
+		<property name="assetPath">
+			<value>EDITED/FS/Wood/runWood_47.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.0063333333333333332</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f0db8f21-9fe1-40a7-9f71-e5f9d573375a}</destination>
+		</relationship>
+	</object>
+</objects>
